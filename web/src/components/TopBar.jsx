@@ -9,7 +9,7 @@ export default function TopBar() {
   const initials = (active?.name?.[0] || "P").toUpperCase();
 
   return (
-    <div className="topbar">
+    <div className="topbar mobile-only">
       <button className="tb-slot" aria-label="Open profiles" onClick={() => navigate("/profiles")}>
         {active?.avatar
           ? <span className="avatar-mini img" style={{ backgroundImage: `url(${active.avatar})` }} />

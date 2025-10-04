@@ -86,3 +86,32 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:"Manrope",syste
 
 /* Mobile */
 @media (max-width:992px){.sidebar{display:none}.topbar{left:0}.main{margin-left:0}}
+
+/* === Visibility control for mobile vs desktop === */
+.mobile-only { display: none; }
+
+/* Desktop >= 993px: hide mobile bars; compact desktop padding */
+@media (min-width: 993px) {
+  .mobile-only { display: none !important; }
+  .topbar { display: none !important; }
+  .bottom-nav { display: none !important; }
+  /* Desktop content spacing (no mobile bars reserved) */
+  .main {
+    margin-left: 78px !important;
+    padding: 16px !important;
+  }
+}
+
+/* Mobile <= 992px: show mobile bars and reserve space */
+@media (max-width: 992px) {
+  .mobile-only { display: block !important; }
+  /* Desktop sidebar hidden in your base CSS; keep it that way */
+  .main {
+    margin-left: 0 !important;
+    padding: calc(var(--topbar-h) + env(safe-area-inset-top, 8px)) 16px
+             calc(var(--botnav-h) + env(safe-area-inset-bottom, 16px)) 16px !important;
+  }
+}
+
+/* Topbar should anchor from left on mobile layout */
+.topbar { left: 0 !important; }

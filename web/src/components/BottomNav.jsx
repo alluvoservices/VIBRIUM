@@ -11,7 +11,7 @@ const B = ({ to, icon: Icon, label }) => (
 
 export default function BottomNav() {
   return (
-    <nav className="bottom-nav" role="navigation" aria-label="Bottom">
+    <nav className="bottom-nav mobile-only" role="navigation" aria-label="Bottom">
       <B to="/search"  icon={Search}       label="Search"/>
       <B to="/stream"  icon={Clapperboard} label="Stream"/>
       <B to="/order"   icon={UtensilsCrossed} label="Order"/>
