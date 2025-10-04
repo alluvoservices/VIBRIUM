@@ -345,3 +345,11 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:"Manrope",syste
   .avatar-xxl { width: 108px !important; height: 108px !important; }
   .p-title   { font-size: 13px !important; }
 }
+
+/* Bottom bar center item emphasis */
+.bottom-nav .bn-item.center svg {
+  transform: scale(1.12);
+}
+.bottom-nav .bn-item.center .mnav-label {
+  font-weight: 800;
+}
