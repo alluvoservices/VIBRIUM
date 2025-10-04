@@ -260,3 +260,88 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:"Manrope",syste
   }
   .p-title { font-size: 14px !important; }
 }
+
+/* ===== Topbar exact alignment (avatar left, brand centered, bell right) ===== */
+.topbar {
+  position: fixed;
+  top: 0; left: 78px; right: 0;                  /* desktop default; mobile fixes below */
+  height: calc(var(--topbar-h) + env(safe-area-inset-top, 8px));
+  padding-top: env(safe-area-inset-top, 8px);
+  background: #0f1626cc; border-bottom: 1px solid var(--border);
+  display: grid !important;
+  grid-template-columns: 56px 1fr 56px !important; /* left slot | brand center | right slot */
+  align-items: center !important;
+  z-index: 1000 !important;
+  gap: 0 !important;
+}
+
+/* Common slot style */
+.tb-slot {
+  height: 36px; width: 36px;                     /* slightly smaller circle */
+  margin: 0 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; border: 1px solid var(--border);
+  background: #0e1526; color: #dbe7ff;
+}
+
+/* Ensure left/right slots anchor to sides */
+.tb-left  { justify-self: start !important; margin-left: 10px !important; }
+.tb-right { justify-self: end   !important; margin-right: 10px !important; }
+
+/* Brand must be truly centered regardless of slot widths */
+.tb-brand {
+  justify-self: center !important;
+  display: inline-flex !important; align-items: center !important; gap: 6px !important;
+  pointer-events: none !important;
+}
+.tb-brand img { width: 20px; height: 20px; border-radius: 4px; }
+.tb-brand span {
+  font-weight: 800; letter-spacing: .3px;
+  background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent;
+  line-height: 1;
+}
+
+/* Extra-tight phones: reduce sizes a bit more and hide logo mark if needed */
+@media (max-width: 400px) {
+  .tb-slot { height: 34px; width: 34px; margin: 0 5px; }
+  .tb-brand img { display: none; }                     /* keep the VIBRIUM text only */
+  .tb-brand span { font-size: 15px; }
+}
+@media (max-width: 360px) {
+  .tb-slot { height: 32px; width: 32px; }
+  .tb-brand span { font-size: 14px; }
+}
+
+/* On mobile the topbar must start from left:0 and reserve space above content */
+@media (max-width: 992px) {
+  .topbar { left: 0 !important; }
+  .main {
+    margin-left: 0 !important;
+    padding-top: calc(var(--topbar-h) + env(safe-area-inset-top, 8px)) !important;
+  }
+}
+
+/* Desktop hides the topbar (mobile-only) */
+@media (min-width: 993px) {
+  .topbar { display: none !important; }
+}
+
+/* ===== Mobile profile tiles: smaller and tighter ===== */
+@media (max-width: 992px) {
+  .profiles-grid-2x2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  .avatar-xxl {
+    width: 118px !important;
+    height: 118px !important;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-1) 40%, transparent) !important;
+  }
+  .p-title { font-size: 14px !important; }
+}
+
+/* Ultra-small widths (old 5.8–6.1” phones) */
+@media (max-width: 360px) {
+  .avatar-xxl { width: 108px !important; height: 108px !important; }
+  .p-title   { font-size: 13px !important; }
+}
