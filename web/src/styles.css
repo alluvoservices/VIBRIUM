@@ -353,3 +353,114 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:"Manrope",syste
 .bottom-nav .bn-item.center .mnav-label {
   font-weight: 800;
 }
+
+/* ============ Modern Active Style – Bottom Bar (mobile) ============ */
+@keyframes vbr-underline-in {
+  0%   { transform: translateY(0) scaleX(0.4); opacity: .2; }
+  100% { transform: translateY(0) scaleX(1);   opacity: 1; }
+}
+@keyframes vbr-glow {
+  0%   { filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
+  100% { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent-1) 60%, transparent)); }
+}
+
+/* base state refinements */
+.bottom-nav .bn-item {
+  position: relative;
+  transform: translateY(0);
+  transition: transform .16s ease, color .18s ease, background .18s ease;
+}
+.bottom-nav .bn-item:active { transform: translateY(1px); }
+
+/* new active look: animated underline + slight lift and crisper color */
+.bottom-nav .bn-item.active {
+  color: #eaf3ff;
+  background: none; /* remove old pill bg */
+  box-shadow: none; /* remove old inset */
+}
+.bottom-nav .bn-item.active svg {
+  transform: translateY(-2px) scale(1.06);
+  animation: vbr-glow .25s ease forwards;
+}
+
+/* animated gradient underline */
+.bottom-nav .bn-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: 6px; left: 50%;
+  width: 36px; height: 4px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: var(--gradient);
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--accent-1) 40%, transparent);
+  animation: vbr-underline-in .28s ease-out both;
+}
+
+/* keep center (Search) slightly larger as main action */
+.bottom-nav .bn-item.center svg { transform: translateY(-1px) scale(1.12); }
+.bottom-nav .bn-item.center .mnav-label { font-weight: 800; }
+
+/* ============ Modern Active Style – Sidebar (desktop) ============ */
+/* Remove old left gradient bar */
+.sidebar .sb-item.active::before { display: none !important; }
+
+/* Soft glass capsule and glow halo around icon */
+@keyframes vbr-pop {
+  0%   { transform: scale(.96); opacity: .9; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+.sidebar .sb-item {
+  position: relative;
+  transition: transform .16s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.sidebar .sb-item:hover { transform: translateY(-2px); }
+
+/* new active tile capsule */
+.sidebar .sb-item.active {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.sidebar .sb-item.active::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.45),
+    0 0 18px color-mix(in srgb, var(--accent-1) 35%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--accent-1) 40%, transparent);
+  animation: vbr-pop .18s ease-out;
+  pointer-events: none;
+}
+
+/* icon halo glow */
+.sidebar .sb-item.active .lucide,
+.sidebar .sb-item.active svg {
+  position: relative;
+  z-index: 1;
+  transform: scale(1.12);
+  color: #eaf3ff;    /* brighter icon */
+  transition: transform .18s ease, color .18s ease;
+}
+.sidebar .sb-item.active .lucide::after,
+.sidebar .sb-item.active svg::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 36px; height: 36px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(45% 45% at 50% 50%, color-mix(in srgb, var(--accent-1) 40%, transparent) 0%, transparent 60%);
+  filter: blur(7px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Improve non-active hover with subtle neon glow */
+.sidebar .sb-item:hover .lucide,
+.sidebar .sb-item:hover svg {
+  transform: scale(1.06);
+  color: #dfe9ff;
+}
