@@ -26,10 +26,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Set base for GH Pages
+      # Set Vite base from the repo name (so assets resolve under /<repo>/)
+      - name: Set Vite base for GH Pages
         run: echo "GH_PAGES_BASE=/${{ github.event.repository.name }}/" >> $GITHUB_ENV
       - run: npm install
       - run: npm run build
+      # Create dist/404.html (SPA fallback)
+      - run: node scripts/spa-404.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
