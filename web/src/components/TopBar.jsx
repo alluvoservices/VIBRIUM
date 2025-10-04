@@ -20,7 +20,7 @@ export default function TopBar() {
              onError={(e)=>{e.currentTarget.onerror=null; e.currentTarget.src=`${base}logo.svg`;}} />
         <span>VIBRIUM</span>
       </div>
-      <NavLink to="/notifications" className={({isActive}) => "tb-slot" + (isActive ? " active" : "")} aria-label="Notifications">
+      <NavLink to="/notifications" className="tb-slot" aria-label="Notifications">
         <Bell size={20}/>
       </NavLink>
     </div>

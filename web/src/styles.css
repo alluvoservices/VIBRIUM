@@ -144,3 +144,30 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:"Manrope",syste
 
 /* Topbar should anchor from left on mobile layout */
 .topbar { left: 0 !important; }
+
+/* === Force desktop/mobile split === */
+.mobile-only { display: none; }
+
+/* Desktop >= 993px: hide mobile bars; remove mobile padding */
+@media (min-width: 993px) {
+  .mobile-only { display: none !important; }
+  .topbar { display: none !important; }
+  .bottom-nav { display: none !important; }
+  .main {
+    margin-left: 78px !important; /* sidebar width */
+    padding: 16px !important;      /* no top/bottom bar space */
+  }
+}
+
+/* Mobile <= 992px: show mobile bars and reserve space */
+@media (max-width: 992px) {
+  .mobile-only { display: block !important; }
+  .sidebar { display: none !important; }
+  .main {
+    margin-left: 0 !important;
+    padding: calc(var(--topbar-h) + env(safe-area-inset-top, 8px)) 16px
+             calc(var(--botnav-h) + env(safe-area-inset-bottom, 16px)) 16px !important;
+  }
+  /* Make sure topbar starts at left on mobile */
+  .topbar { left: 0 !important; }
+}
